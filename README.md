@@ -77,6 +77,14 @@ npm run tauri build
 
 产物在 `src-tauri/target/release/bundle/`。更详细的说明见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
+**Windows ARM64（骁龙笔记本）注意**：从普通终端直接跑 `cargo build` 会在 `ring` 上报 `failed to find tool "clang"`——必须先初始化 ARM64 工具链。仓库里带了脚本：
+
+```bat
+build-arm64.bat            :: 编译 aarch64（debug）
+build-arm64.bat --release  :: 编译 aarch64（release）
+build-and-deliver.bat      :: 编译并复制到桌面
+```
+
 ## 致谢
 
 - 原始项目：[Achilng/floral-notepaper](https://github.com/Achilng/floral-notepaper)

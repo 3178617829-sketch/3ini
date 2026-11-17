@@ -77,6 +77,14 @@ npm run tauri build
 
 The bundle lands in `src-tauri/target/release/bundle/`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the longer version.
 
+**Windows on ARM64 (Snapdragon laptops)**: running `cargo build` from a plain terminal fails inside `ring` with `failed to find tool "clang"` — the ARM64 toolchain has to be initialised first. The repo ships scripts for that:
+
+```bat
+build-arm64.bat            :: build aarch64 (debug)
+build-arm64.bat --release  :: build aarch64 (release)
+build-and-deliver.bat      :: build and copy to the desktop
+```
+
 ## Credits
 
 - Original project: [Achilng/floral-notepaper](https://github.com/Achilng/floral-notepaper)
