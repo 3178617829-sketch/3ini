@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>花笺助手</title>
+    <script>
+      (function () {
+        var opt = localStorage.getItem("theme-option");
+        var t;
+        if (opt === "light" || opt === "dark") {
+          t = opt;
+        } else {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="panel-root"></div>
+    <script type="module" src="/src/panel.ts"></script>
+  </body>
+</html>

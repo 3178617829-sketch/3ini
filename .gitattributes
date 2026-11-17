@@ -1,0 +1,17 @@
+# 行尾策略：源码统一 LF；批处理保留 CRLF（cmd 解析器要求）；PowerShell 用 CRLF
+* text=auto eol=lf
+*.bat -text
+*.cmd -text
+*.ps1 text eol=crlf
+
+# 二进制资源：不参与行尾转换与文本 diff
+*.ico binary
+*.png binary
+*.icns binary
+*.ttf binary
+*.otf binary
+*.woff2 binary
+*.gif binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
