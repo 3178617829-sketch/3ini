@@ -1,9 +1,9 @@
 [
-  "GitHub 访问困难？不妨试试通过 [Mirror酱](https://mirrorchyan.com/) 来更新 3.ini",
-  "您可以在设置中配置 [Mirror酱](https://mirrorchyan.com/) CDK，通过其提供的国内镜像源获取更新",
+  "笔记每天自动备份，保留最近 7 天",
+  "误删的笔记会先进回收站，30 天后才真正删除",
   "按 Ctrl+N 可以快速新建笔记",
   "3.ini 支持 Markdown 与 LaTeX 公式混合编写，适合同时处理文字、逻辑与一点点学术压力",
   "拖拽笔记到分类文件夹即可归类",
   "您可以在设置中切换浅色/深色主题，以适应白天、夜晚，以及不想被屏幕审问的时刻",
-  "3.ini 是开源、免费的自由软件，您可以在 [GitHub](https://github.com/Achilng/floral-notepaper) 上贡献您的代码"
+  "3.ini 是开源、免费的自由软件，您可以在 [GitHub](https://github.com/3178617829-sketch/3ini) 上贡献您的代码"
 ]

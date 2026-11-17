@@ -1,26 +1,22 @@
-[简体中文](README.md) | [繁體中文](README_zh-HK.md) | **English**
-
 <!-- markdownlint-disable -->
+
+[简体中文](README.md) | [繁體中文](README_zh-HK.md) | **English**
 
 <div align="center">
 
-<img src="./src-tauri/icons/icon.png" width="120" alt="Floral Notepaper Icon">
+<img src="./src-tauri/icons/icon.png" width="120" alt="3.ini icon">
 
-# Floral Notepaper
+# 3.ini
 
-A lightweight, elegant, and modern sticky note app for your desktop<br>
+A local note-taking app with a local AI assistant<br>
 Built with Tauri 2 + React
 
-[Report an Issue](https://github.com/Achilng/floral-notepaper/issues) · [Changelog](https://github.com/Achilng/floral-notepaper/releases) <br>
-[Quick Start](#quick-start) · [FAQ](https://github.com/Achilng/floral-notepaper/wiki) · [Building from Source](#building-from-source)
+[Issues](https://github.com/3178617829-sketch/3ini/issues) · [Releases](https://github.com/3178617829-sketch/3ini/releases)
 
-[![Version](https://img.shields.io/github/v/release/Achilng/floral-notepaper)](https://github.com/Achilng/floral-notepaper/releases/latest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-![Stars](https://img.shields.io/github/stars/Achilng/floral-notepaper?color=ffcb47&labelColor=black)</br>
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![React 19](https://img.shields.io/badge/React-19-blue?logo=react)
 ![Tauri v2](https://img.shields.io/badge/Tauri-v2-%2324C8D8?logo=tauri)
-![Rust Edition 2021](https://img.shields.io/badge/Rust-2021-%23000000?logo=rust)<br>
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Achilng/floral-notepaper)
+![Rust 2021](https://img.shields.io/badge/Rust-2021-%23000000?logo=rust)
 
 </div>
 
@@ -28,107 +24,63 @@ Built with Tauri 2 + React
 
 ---
 
-## Why Floral Notepaper
+## What is this
 
-Most note-taking or sticky note apps out there are either bloated and steep to learn, or dated and long abandoned. Floral Notepaper was built to be different — quick to summon, light to use, and a pleasure to look at.
+3.ini is a note-taking app that lives in the system tray. Hit `Ctrl+Space` to summon it from anywhere, jot something down, get on with your day. Notes never leave your machine — no account, no sync, no upload.
+
+It can also talk to a local AI through [Ollama](https://ollama.com/download): chat, translation, and turning plain language into a schedule. The models run on your own hardware, so it works offline too.
+
+> This project is a fork of [Achilng/floral-notepaper](https://github.com/Achilng/floral-notepaper) (MIT). The UI, the editor and most of the internals come from that project; what changed here is the branding and icons, plus the local AI integration. The original is a lovely piece of software — go take a look.
 
 ## Features
 
-- **Markdown Editing & Preview** — Full GitHub Flavored Markdown support with seamless toggling between edit and preview modes
+### Notes
 
-  ![Main window screenshot](Docs/images/主窗口截图.png)
+- Markdown editing and preview, with GFM and LaTeX support
+- System tray + global shortcut (`Ctrl+Space` by default), multiple quick-note windows
+- Tile mode: pin a note anywhere on your desktop
+- Folders, `.md` import and export
+- Daily automatic backups (kept for 7 days); deleted notes go to Trash and are removed after 30 days
 
-- **Quick Note** — Summon a note window instantly from the system tray or via a global hotkey (default: `Ctrl+Space`)
+### Local AI (optional)
 
-  ![Multi-window example](Docs/images/小窗多开示例.gif)
+Install [Ollama](https://ollama.com/download) and pull the models. Three models, three jobs:
 
-- **Pin Mode** — Pin a note to a fixed spot on your desktop for quick reference and easy copying
+| Job            | Model           | Size   |
+| -------------- | --------------- | ------ |
+| Chat           | `qwen3.5-9b`    | 6.6 GB |
+| Translation    | `hunyuan-mt-7b` | 4.6 GB |
+| Schedule parse | `spark-x2.6-4b` | 2.7 GB |
 
-  ![Pin mode example](Docs/images/AI绘画截图.png)
+```bash
+ollama pull qwen3.5-9b
+ollama pull hunyuan-mt-7b
+ollama pull spark-x2.6-4b
+```
 
-- **Import & Export** — Import and export notes as `.md` files
+The app works fine without any of this — the AI entry points simply stay out of the way until a model is available.
 
-## Use Cases
+## Download
 
-- Use it as an always-visible clipboard to stash and copy text on the fly
-- Jot things down while gaming or watching videos
-- Capture a quick thought or burst of inspiration
-- Keep a to-do list right on your desktop
+Grab a build from [Releases](https://github.com/3178617829-sketch/3ini/releases).
 
-## Quick Start
+> **Note**: the official build is **Windows ARM64 (Snapdragon laptops)** only — that is the one machine the maintainer has actually tested. On Intel/AMD Windows, build from source; it should work, but nobody has verified it.
 
-### Download
+## Building from source
 
-#### Via MirrorChyan
+Requirements: Node.js 22+, stable Rust, and Visual Studio Build Tools (Desktop development with C++).
 
-> [!TIP]
-> If you have trouble accessing GitHub or experience slow downloads, try downloading Floral Notepaper via MirrorChyan.<br>
-> Downloading via MirrorChyan also helps support the developer — see the [MirrorChyan website](https://mirrorchyan.com/) for details.
+```bash
+npm ci
+npm run tauri build
+```
 
-| Platform | Arch                    | Download                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| -------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Windows  | x64                     | [![Windows x64 Setup](https://img.shields.io/badge/Setup-x64-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGgyNDJ2MjQySDB6TTI3MCAwaDI0MnYyNDJIMjcwek0wIDI3MGgyNDJ2MjQySDB6TTI3MCAyNzBoMjQydjI0MkgyNzB6Ii8%2BPC9zdmc%2B)](https://mirrorchyan.com/zh/projects?rid=floral&os=windows&arch=x64&channel=stable)           |
-| Windows  | AArch64                 | [![Windows AArch64 Setup](https://img.shields.io/badge/Setup-AArch64-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGgyNDJ2MjQySDB6TTI3MCAwaDI0MnYyNDJIMjcwek0wIDI3MGgyNDJ2MjQySDB6TTI3MCAyNzBoMjQydjI0MkgyNzB6Ii8%2BPC9zdmc%2B)](https://mirrorchyan.com/zh/projects?rid=floral&os=windows&arch=arm64&channel=stable) |
-| macOS    | AArch64 (Apple Silicon) | [![macOS Apple Silicon](https://img.shields.io/badge/DMG-Apple%20Silicon-%23000000.svg?logo=apple)](https://mirrorchyan.com/zh/projects?rid=floral&os=macos&channel=stable&arch=arm64)                                                                                                                                                                                                                                                                                       |
-| macOS    | x64 (Intel)             | [![macOS Intel](https://img.shields.io/badge/DMG-Intel%20X64-%2300A9E0.svg?logo=apple)](https://mirrorchyan.com/zh/projects?rid=floral&os=macos&channel=stable&arch=x64)                                                                                                                                                                                                                                                                                                     |
+The bundle lands in `src-tauri/target/release/bundle/`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the longer version.
 
-#### Via GitHub
+## Credits
 
-Head over to the [Releases page](https://github.com/Achilng/floral-notepaper/releases/latest) to download.
-
-##### Download Reference
-
-| Platform | Arch                    | Type                    | Filename                                 |
-| -------- | ----------------------- | ----------------------- | ---------------------------------------- |
-| Windows  | x64                     | Installer (Recommended) | floral-notepaper_x.y.z_x64-setup.exe     |
-| Windows  | x64                     | Portable                | floral-notepaper_x.y.z.exe               |
-| Windows  | x64                     | MSIX Package            | floral-notepaper_x.y.z_x64.msix          |
-| Windows  | AArch64                 | Installer (Recommended) | floral-notepaper_x.y.z_aarch64-setup.exe |
-| Windows  | AArch64                 | MSIX Package            | floral-notepaper_x.y.z_aarch64.msix      |
-| macOS    | AArch64 (Apple Silicon) | DMG                     | floral-notepaper_x.y.z_aarch64.dmg       |
-| macOS    | x64 (Intel)             | DMG                     | floral-notepaper_x.y.z_x64.dmg           |
-
-#### Via Microsoft Store
-
-Download Floral Notepaper from the [Microsoft Store](https://apps.microsoft.com/detail/9NRCC0ZSG81R)
-
-> Note: MSIX installs (from the Microsoft Store or sideloaded .msix files) do not support in-app updates. Get the latest version from the Microsoft Store or GitHub Releases.
-
-<!-- markdownlint-disable -->
-
-<a href="https://apps.microsoft.com/detail/9NRCC0ZSG81R?referrer=appbadge&mode=full" target="_blank"  rel="noopener noreferrer">
-	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
-</a>
-
-<!-- markdownlint-restore -->
-
-#### macOS Installation Guidance
-
-If you encounter installation issues, please refer to:
-
-- Wiki: [macOS Installation Guidance](https://github.com/Achilng/floral-notepaper/wiki/macOS-%E5%AE%89%E8%A3%85%E6%8C%87%E5%BC%95-%7C-macOS-Installation-Guidance)
-- Or video (Bilibili): [Mac云课堂 - Installing software on Mac means learning to wrestle with Apple](https://www.bilibili.com/video/BV1tg411t7hN)
-
-### Building from Source
-
-Please refer to [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Star History
-
-[![Star History Chart](https://star-history.dera.page/svg?repos=Achilng/floral-notepaper&type=Date&legend=top-left)](https://star-history.dera.page/#Achilng/floral-notepaper&Date)
-
-## 🌟 Contributors
-
-[![contrib.rocks](https://contrib.rocks/image?repo=Achilng/floral-notepaper&max=1000)](https://contrib.rocks/image?repo=Achilng/floral-notepaper&max=1000)
-
-## Sponsors
-
-<!-- markdownlint-disable -->
-
-| <img src="https://signpath.org/assets/favicon.png" alt="SignPath Logo" width=50> | Free code signing provided by [SignPath.io](https://signpath.io), certificate by [SignPath Foundation](https://signpath.org/) |
-| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-
-<!-- markdownlint-restore -->
+- Original project: [Achilng/floral-notepaper](https://github.com/Achilng/floral-notepaper)
+- Every contributor to that project and its upstream dependencies
 
 ## License
 

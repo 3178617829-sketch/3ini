@@ -2,7 +2,7 @@
 
 # 贡献指南
 
-感谢你对花笺（Floral Notepaper）的关注！这份指南会帮助你了解如何参与项目开发。
+感谢你对 3.ini 的关注！这份指南会帮助你了解如何参与项目开发。
 
 ## 开发环境配置
 
@@ -21,8 +21,8 @@
 ### 克隆与启动
 
 ```bash
-git clone git@github.com:Achilng/floral-notepaper.git
-cd floral-notepaper
+git clone git@github.com:3178617829-sketch/3ini.git
+cd 3ini
 npm install
 
 # 启动开发版
@@ -85,7 +85,7 @@ npx oxfmt --check                           # 格式检查
 
 ## Pull Request 流程
 
-1. **先搜索** [已有 PR](https://github.com/Achilng/floral-notepaper/pulls)，确认没有雷同的提交，避免重复劳动
+1. **先搜索** [已有 PR](https://github.com/3178617829-sketch/3ini/pulls)，确认没有雷同的提交，避免重复劳动
 2. Fork 本仓库，从 `main` 分支创建你的功能/修复分支
 3. 开发完成后，确保本地检查全部通过
 4. 提交 PR 到 `main` 分支，**填写 PR 模板**中的各项内容
@@ -100,10 +100,10 @@ PR 标题同样遵循 Conventional Commits 格式，例如 `feat: 添加笔记�
 
 ## 发布流程（维护者）
 
-正式版本的 Tag、跨平台构建、Windows SignPath 签名、安装验证和 Draft Release 操作，请参考 [Release 发布流程](Docs/RELEASE_WORKFLOW.md)。
+正式版本由 GitHub Actions（`.github/workflows/build.yml`）在 Windows runner 上构建 x64 安装包，产物见 Actions 的 artifact；官方分发的 ARM64 版本由维护者在本地执行 `build-and-deliver.bat` 构建。发布时手动打 Tag 并把安装包上传到 Release 即可。
 
 ## 问题反馈
 
-- 报告 bug：[提交 Issue](https://github.com/Achilng/floral-notepaper/issues/new?template=bug.yml)
-- 功能请求：[提交 Issue](https://github.com/Achilng/floral-notepaper/issues/new?template=enhancement.yml)
-- 一般讨论：[GitHub Discussions](https://github.com/Achilng/floral-notepaper/discussions)
+- 报告 bug：[提交 Issue](https://github.com/3178617829-sketch/3ini/issues/new?template=bug.yml)
+- 功能请求：[提交 Issue](https://github.com/3178617829-sketch/3ini/issues/new?template=enhancement.yml)
+- 一般讨论：[GitHub Discussions](https://github.com/3178617829-sketch/3ini/discussions)

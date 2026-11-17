@@ -75,11 +75,11 @@ impl StoredUpdateSettings {
 impl Default for StoredUpdateSettings {
     fn default() -> Self {
         Self {
-            auto_check: true,
+            auto_check: false,
             auto_download: false,
             check_interval_hours: 24,
-            check_source_preference: CheckSourcePreference::MirrorChyanFirst,
-            download_source_preference: DownloadSourcePreference::MirrorChyanFirst,
+            check_source_preference: CheckSourcePreference::GitHubFirst,
+            download_source_preference: DownloadSourcePreference::GitHubFirst,
             channel: UpdateChannel::Stable,
             allow_prerelease: false,
             last_auto_check_at: None,
@@ -160,16 +160,16 @@ mod tests {
 
         let settings = load(&paths).expect("load default settings");
 
-        assert!(settings.auto_check);
+        assert!(!settings.auto_check);
         assert!(!settings.auto_download);
         assert_eq!(settings.check_interval_hours, 24);
         assert_eq!(
             settings.check_source_preference,
-            CheckSourcePreference::MirrorChyanFirst
+            CheckSourcePreference::GitHubFirst
         );
         assert_eq!(
             settings.download_source_preference,
-            DownloadSourcePreference::MirrorChyanFirst
+            DownloadSourcePreference::GitHubFirst
         );
         assert!(paths.settings_path().exists());
     }

@@ -1,8 +1,8 @@
 [package]
 name = "floral-notepaper"
 version = "1.2.0"
-description = "A lightweight cross-platform desktop note app"
-authors = ["Achilng"]
+description = "3.ini — a local note app with a local AI assistant"
+authors = ["YECEE"]
 edition = "2021"
 default-run = "floral-notepaper"
 

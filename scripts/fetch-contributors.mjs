@@ -10,11 +10,11 @@ function writeContributors(contributors) {
   writeFileSync(OUTPUT, JSON.stringify(contributors, null, 2) + "\n");
 }
 
-const REPO = "Achilng/floral-notepaper";
+const REPO = "3178617829-sketch/3ini";
 const API_URL = `https://api.github.com/repos/${REPO}/contributors?per_page=100`;
 
 async function fetchContributors() {
-  const headers = { "User-Agent": "floral-notepaper-build" };
+  const headers = { "User-Agent": "3ini-build" };
   const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
   if (token) {
     headers.Authorization = `Bearer ${token}`;

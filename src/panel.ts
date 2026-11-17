@@ -1978,7 +1978,7 @@ async function openFullNotepad(): Promise<void> {
     await invoke("open_memo_window");
   } catch (error) {
     console.error("open_memo_window failed", error);
-    appendMessage({ role: "notice", text: "打不开完整花笺，稍后再试" });
+    appendMessage({ role: "notice", text: "打不开主窗口，稍后再试" });
   }
 }
 

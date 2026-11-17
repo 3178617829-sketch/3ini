@@ -1,26 +1,22 @@
-[简体中文](README.md) | **繁體中文** | [English](README_en-US.md)
-
 <!-- markdownlint-disable -->
+
+[简体中文](README.md) | **繁體中文** | [English](README_en-US.md)
 
 <div align="center">
 
-<img src="./src-tauri/icons/icon.png" width="120" alt="花箋圖示">
+<img src="./src-tauri/icons/icon.png" width="120" alt="3.ini 圖示">
 
-# 花箋 Floral Notepaper
+# 3.ini
 
-輕巧、優雅、現代化的本機便箋工具<br>
-基於 Tauri 2 + React 構建
+本機筆記 + 本機 AI 助手<br>
+以 Tauri 2 + React 建置
 
-[回報問題](https://github.com/Achilng/floral-notepaper/issues) · [更新日誌](https://github.com/Achilng/floral-notepaper/releases) <br>
-[快速開始](#快速開始) · [FAQ](https://github.com/Achilng/floral-notepaper/wiki) · [構建指南](#從原始碼構建)
+[回報問題](https://github.com/3178617829-sketch/3ini/issues) · [更新日誌](https://github.com/3178617829-sketch/3ini/releases)
 
-[![Version](https://img.shields.io/github/v/release/Achilng/floral-notepaper)](https://github.com/Achilng/floral-notepaper/releases/latest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-![Stars](https://img.shields.io/github/stars/Achilng/floral-notepaper?color=ffcb47&labelColor=black)</br>
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![React 19](https://img.shields.io/badge/React-19-blue?logo=react)
 ![Tauri v2](https://img.shields.io/badge/Tauri-v2-%2324C8D8?logo=tauri)
-![Rust Edition 2021](https://img.shields.io/badge/Rust-2021-%23000000?logo=rust)<br>
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Achilng/floral-notepaper)
+![Rust 2021](https://img.shields.io/badge/Rust-2021-%23000000?logo=rust)
 
 </div>
 
@@ -28,107 +24,63 @@
 
 ---
 
-## 為什麼選擇花箋
+## 這是什麼
 
-市面上現有的筆記或便箋軟件，要麼功能繁重、上手門檻高，要麼介面陳舊、久未更新。花箋因此而生，其特點是輕巧、隨呼隨用，同時提供現代化的介面與舒適的編輯體驗。
+3.ini 是一個常駐系統匣的本機筆記工具。按 `Ctrl+Space` 隨時喚出，隨手記、隨手查，筆記全程存在自己的電腦裡，不需要帳號，也不上傳任何資料。
 
-## 功能特點
+在筆記之外，它還能接一個本機 AI：透過 [Ollama](https://ollama.com/download) 執行模型，做對話、翻譯、把自然語言拆成日程。模型跑在自己的機器上，不連網也能用。
 
-- **Markdown 編輯與預覽** — 支援 GitHub Flavored Markdown 語法，可即時切換編輯及預覽模式
+> 本專案基於 [Achilng/floral-notepaper](https://github.com/Achilng/floral-notepaper)（MIT）修改而來。介面、筆記編輯與大部分底層功能來自原專案，此處改動的是品牌與圖示，並加入了本機 AI 能力。原專案是一個很好的軟體，建議也去看看。
 
-  ![主視窗截圖](Docs/images/主窗口截图.png)
+## 功能
 
-- **快速便箋** — 透過系統匣或全域快速鍵（預設 `Ctrl+Space`）隨時喚出便箋視窗
+### 筆記
 
-  ![小視窗多開示例](Docs/images/小窗多开示例.gif)
+- Markdown 編輯與預覽，支援 GFM 語法與 LaTeX 公式
+- 系統匣常駐，全域快捷鍵（預設 `Ctrl+Space`）喚出便箋視窗，支援多開
+- 磁貼模式：把筆記釘在桌面某處
+- 分類資料夾、`.md` 匯入匯出
+- 每日自動備份（保留 7 天），刪除的筆記會先進資源回收筒（30 天後才真正刪除）
 
-- **磁貼模式** — 將筆記固定於桌面某處，以便快速查閱及複製
+### 本機 AI（選用）
 
-  ![磁貼示例](Docs/images/AI绘画截图.png)
+需要自行安裝 Ollama 並拉取模型。三個模型分工如下：
 
-- **匯入匯出** — 支援 `.md` 檔案的匯入及匯出
+| 用途     | 模型            | 大小   |
+| -------- | --------------- | ------ |
+| 對話     | `qwen3.5-9b`    | 6.6 GB |
+| 翻譯     | `hunyuan-mt-7b` | 4.6 GB |
+| 日程解析 | `spark-x2.6-4b` | 2.7 GB |
 
-## 應用場景
+```bash
+ollama pull qwen3.5-9b
+ollama pull hunyuan-mt-7b
+ollama pull spark-x2.6-4b
+```
 
-- 用作隨時可見的剪貼簿，快速暫存及複製文字
-- 遊戲、觀看影片時隨手記錄
-- 臨時記錄思路或靈感
-- 桌面待辦清單
+不安裝 AI 也能正常使用，只是介面上不會出現 AI 相關入口。
 
-## 快速開始
+## 下載
 
-### 下載安裝
+前往 [Releases](https://github.com/3178617829-sketch/3ini/releases) 下載。
 
-#### 透過 Mirror 醬下載
+> **注意**：目前官方只提供 **Windows ARM64（驍龍筆記型電腦）** 版本——這是開發者手邊唯一實測通過的機器。Intel/AMD 的 Windows 請自行從原始碼建置，理論上可以執行，但沒有驗證過。
 
-> [!TIP]
-> 如您的網絡不便訪問 GitHub，或下載速度過慢，您可以嘗試透過 Mirror 醬下載花箋<br>
-> 此外，您也可以透過使用 Mirror 醬下載花箋來贊助花箋的開發者，詳見 [Mirror 醬官網](https://mirrorchyan.com/)
+## 從原始碼建置
 
-| 系統    | 架構                    | 下載連結                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Windows | x64                     | [![Windows x64 Setup](https://img.shields.io/badge/Setup-x64-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGgyNDJ2MjQySDB6TTI3MCAwaDI0MnYyNDJIMjcwek0wIDI3MGgyNDJ2MjQySDB6TTI3MCAyNzBoMjQydjI0MkgyNzB6Ii8%2BPC9zdmc%2B)](https://mirrorchyan.com/zh/projects?rid=floral&os=windows&arch=x64&channel=stable)           |
-| Windows | AArch64                 | [![Windows AArch64 Setup](https://img.shields.io/badge/Setup-AArch64-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGgyNDJ2MjQySDB6TTI3MCAwaDI0MnYyNDJIMjcwek0wIDI3MGgyNDJ2MjQySDB6TTI3MCAyNzBoMjQydjI0MkgyNzB6Ii8%2BPC9zdmc%2B)](https://mirrorchyan.com/zh/projects?rid=floral&os=windows&arch=arm64&channel=stable) |
-| macOS   | AArch64 (Apple Silicon) | [![macOS Apple Silicon](https://img.shields.io/badge/DMG-Apple%20Silicon-%23000000.svg?logo=apple)](https://mirrorchyan.com/zh/projects?rid=floral&os=macos&channel=stable&arch=arm64)                                                                                                                                                                                                                                                                                       |
-| macOS   | x64 (Intel)             | [![macOS Intel](https://img.shields.io/badge/DMG-Intel%20X64-%2300A9E0.svg?logo=apple)](https://mirrorchyan.com/zh/projects?rid=floral&os=macos&channel=stable&arch=x64)                                                                                                                                                                                                                                                                                                     |
+相依：Node.js 22+、Rust stable、Visual Studio Build Tools（C++ 桌面開發）。
 
-#### 透過 GitHub 下載
+```bash
+npm ci
+npm run tauri build
+```
 
-請前往 [Release 頁](https://github.com/Achilng/floral-notepaper/releases/latest) 下載花箋
+產物在 `src-tauri/target/release/bundle/`。更詳細的說明見 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
-##### 下載參考
+## 致謝
 
-| 系統    | 架構                    | 類型             | 檔案名稱                                    |
-| ------- | ----------------------- | ---------------- | ------------------------------------------- |
-| Windows | x64                     | 安裝程式（推薦） | floral-notepaper\_版本號\_x64-setup.exe     |
-| Windows | x64                     | 可攜版           | floral-notepaper\_版本號.exe                |
-| Windows | x64                     | 安裝包           | floral-notepaper\_版本號\_x64.msix          |
-| Windows | AArch64                 | 安裝程式（推薦） | floral-notepaper\_版本號\_aarch64-setup.exe |
-| Windows | AArch64                 | 安裝包           | floral-notepaper\_版本號\_aarch64.msix      |
-| macOS   | AArch64 (Apple Silicon) | DMG              | floral-notepaper\_版本號\_aarch64.dmg       |
-| macOS   | x64 (Intel)             | DMG              | floral-notepaper\_版本號\_x64.dmg           |
-
-#### 透過 Microsoft Store 下載
-
-前往 [Microsoft Store](https://apps.microsoft.com/detail/9NRCC0ZSG81R) 下載花箋
-
-> 注意：MSIX 安裝（無論來自 Microsoft Store 或側載的 .msix 檔案）暫不支援應用程式內更新，請透過 Microsoft Store 或 GitHub Releases 取得最新版本。
-
-<!-- markdownlint-disable -->
-
-<a href="https://apps.microsoft.com/detail/9NRCC0ZSG81R?referrer=appbadge&mode=full" target="_blank"  rel="noopener noreferrer">
-	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
-</a>
-
-<!-- markdownlint-restore -->
-
-#### macOS 版安裝指引
-
-如遇安裝問題，請參考：
-
-- Wiki 中的 [macOS 安裝指引](https://github.com/Achilng/floral-notepaper/wiki/macOS-%E5%AE%89%E8%A3%85%E6%8C%87%E5%BC%95-%7C-macOS-Installation-Guidance)
-- 或影片（Bilibili）：[Mac雲課堂 - 在 Mac 上裝軟件，要學會和蘋果鬥智鬥勇](https://www.bilibili.com/video/BV1tg411t7hN)
-
-### 從原始碼構建
-
-請參考 [CONTRIBUTING.md](CONTRIBUTING.md)
-
-## Star History
-
-[![Star History Chart](https://star-history.dera.page/svg?repos=Achilng/floral-notepaper&type=Date&legend=top-left)](https://star-history.dera.page/#Achilng/floral-notepaper&Date)
-
-## 🌟 貢獻者
-
-[![contrib.rocks](https://contrib.rocks/image?repo=Achilng/floral-notepaper&max=1000)](https://contrib.rocks/image?repo=Achilng/floral-notepaper&max=1000)
-
-## Sponsors
-
-<!-- markdownlint-disable -->
-
-| <img src="https://signpath.org/assets/favicon.png" alt="SignPath Logo" width=50> | Free code signing provided by [SignPath.io](https://signpath.io), certificate by [SignPath Foundation](https://signpath.org/) |
-| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-
-<!-- markdownlint-restore -->
+- 原始專案：[Achilng/floral-notepaper](https://github.com/Achilng/floral-notepaper)
+- 原專案及上游相依的所有貢獻者
 
 ## 授權條款
 
