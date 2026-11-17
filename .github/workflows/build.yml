@@ -40,6 +40,12 @@ jobs:
       - name: 安装前端依赖
         run: npm ci
 
+      - name: 生成贡献者列表
+        # 该文件被 .gitignore 排除，本地由 npm run build 顺带生成；CI 直接跑 tsc 会找不到它
+        run: node scripts/fetch-contributors.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: TypeScript 类型检查
         run: npx tsc --noEmit
 
