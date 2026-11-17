@@ -13,6 +13,7 @@
 import "./panel/panel.css";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 // 关于页的版本号：优先问 Tauri 要真实的应用版本（tauri.conf.json 里的 1.2.0）；
 // 拿不到时退回写死的 PANEL_APP_FALLBACK_VERSION（注释里注明来源）。
 import { getVersion } from "@tauri-apps/api/app";
@@ -171,7 +172,7 @@ root.innerHTML = `
       <div class="appname"><span class="dot"></span>3.ini</div>
       <div class="tb-actions">
         <button class="icon-btn" data-action="settings" title="设置">⚙</button>
-        <button class="icon-btn" data-action="hide" title="收起">—</button>
+        <button class="icon-btn" data-action="minimize" title="最小化">—</button>
       </div>
     </div>
 
@@ -1946,10 +1947,17 @@ async function wireChatEvents() {
 
 // ── 事件绑定 ──────────────────────────────
 
-// 顶栏：收起 = 隐藏面板（小条会随之出现）；齿轮 = 在面板内弹轻设置页。
+// 顶栏：右侧「—」= 最小化到任务栏（用户拍板 2026-11-17：以前这里是「收起」，
+// 面板直接消失只剩边缘小条，用户当成软件被关了）；Esc 才是「收起」；齿轮 = 在面板内弹轻设置页。
 root.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;
   const action = target.closest("[data-action]")?.getAttribute("data-action");
+  if (action === "minimize") {
+    getCurrentWindow()
+      .minimize()
+      .catch((error) => console.error("minimize failed", error));
+    return;
+  }
   if (action === "hide") {
     invoke("hide_panel").catch((error) => console.error("hide_panel failed", error));
     return;

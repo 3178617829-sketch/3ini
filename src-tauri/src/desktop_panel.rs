@@ -43,7 +43,7 @@ fn create_panel(app: &AppHandle) -> Result<(), Box<dyn std::error::Error>> {
         .inner_size(PANEL_WIDTH, PANEL_HEIGHT)
         .resizable(false)
         .maximizable(false)
-        .minimizable(false)
+        .minimizable(true)
         .decorations(false)
         .transparent(true)
         .shadow(true)
