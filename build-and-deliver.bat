@@ -11,7 +11,7 @@ if /I "%~1"=="--release" (
   set "FLAG=--release"
 )
 set "TARGET_EXE=%SRC_DIR%src-tauri\target\aarch64-pc-windows-msvc\%PROFILE%\floral-notepaper.exe"
-set "DESKTOP_EXE=C:\Users\Lenovo\Desktop\3.ini.exe"
+set "DESKTOP_EXE=%USERPROFILE%\Desktop\3.ini.exe"
 echo [1/2] Building (%PROFILE%) ...
 call "%SRC_DIR%build-arm64.bat" %FLAG%
 if errorlevel 1 goto :buildfail
