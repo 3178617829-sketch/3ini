@@ -84,6 +84,11 @@ export function getFileSize(path: string): Promise<number> {
   return invoke("get_file_size", { path });
 }
 
+/** 笔记数据目录（通常是 `文档\花笺`）。画布这类附属文件都拼在它下面。 */
+export function getDataBaseDir(): Promise<string> {
+  return invoke<string>("images_get_base_dir");
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
