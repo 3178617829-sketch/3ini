@@ -2425,7 +2425,10 @@ fn apply_autostart(app: &AppHandle, enabled: bool) -> Result<(), Box<dyn Error>>
     let manager = app.autolaunch();
     if enabled {
         manager.enable()?;
-    } else {
+    } else if manager.is_enabled().unwrap_or(false) {
+        // 注册表 Run 项本来就不存在时，auto-launch 的 disable() 会返回
+        // ERROR_FILE_NOT_FOUND（os error 2）。那是「本来就没开」，不是失败；
+        // 先查再删，避免每次启动都刷一条吓人的错误。
         manager.disable()?;
     }
     Ok(())

@@ -1,5 +1,6 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+// 不走控制台子系统：debug 版也不再弹黑窗口。
+// 需要看 println!/eprintln! 日志时，把这行临时改回 cfg_attr(not(debug_assertions), ...)。
+#![windows_subsystem = "windows"]
 
 fn main() {
     let mut args = std::env::args_os();

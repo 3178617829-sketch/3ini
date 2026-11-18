@@ -187,14 +187,14 @@ fn backup_once_in(data_dir: &Path, today: NaiveDate) -> Result<BackupOutcome, Ap
     let date = today.format("%Y-%m-%d").to_string();
     let target_dir = root.join(&date);
 
-    let files = if target_dir.is_dir() {
+    let (files, fresh) = if target_dir.is_dir() {
         // 今天已经备过（可能上次备份在中途失败，这里不重做，按规格判定为「已备份」）
-        dir_stats(&target_dir)?.0
+        (dir_stats(&target_dir)?.0, false)
     } else {
         fs::create_dir_all(&root).map_err(|error| io_error("创建备份根目录", &root, error))?;
         let mut count = 0usize;
         match copy_dir_recursive(&source_dir, &target_dir, &mut count) {
-            Ok(()) => count,
+            Ok(()) => (count, true),
             Err(error) => {
                 // 半成品目录会让下次启动误判「今天已备份」，这里清掉以便下次重试
                 let _ = fs::remove_dir_all(&target_dir);
@@ -204,33 +204,19 @@ fn backup_once_in(data_dir: &Path, today: NaiveDate) -> Result<BackupOutcome, Ap
     };
 
     let removed = prune_old_backups(&root, KEEP_DAYS)?;
-    let backed_up = !target_dir.is_dir() || is_empty_marker_absent();
-    let _ = backed_up;
 
-    if !was_fresh_backup(&target_dir, files) {
-        // 占位分支，实际由下面 return 决定
-    }
-
-    Ok(pick_outcome(&date, files, removed, files_created_now))
+    Ok(if !fresh {
+        BackupOutcome::AlreadyBackedUpToday { date }
+    } else if removed > 0 {
+        BackupOutcome::BackedUpAndPruned {
+            date,
+            files,
+            removed,
+        }
+    } else {
+        BackupOutcome::BackedUp { date, files }
+    })
 }
-
-/// 空实现占位（保留函数名可读性，不做任何事）。
-fn is_empty_marker_absent() -> bool {
-    false
-}
-
-fn was_fresh_backup(_dir: &Path, _files: usize) -> bool {
-    false
-}
-
-fn pick_outcome(_date: &str, _files: usize, _removed: usize, _fresh: bool) -> BackupOutcome {
-    BackupOutcome::BackedUp {
-        date: String::new(),
-        files: 0,
-    }
-}
-
-static files_created_now: bool = false;
 
 /// 每天第一次调用时备份一次；当天已备份则跳过。错误由调用方决定是否忽略。
 pub fn backup_once() -> Result<BackupOutcome, AppError> {
